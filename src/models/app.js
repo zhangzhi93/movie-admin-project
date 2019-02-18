@@ -1,12 +1,20 @@
 import { getProvinces, getCitys, getCountys, getStoreCitys } from '../services/app';
+import { MenuList } from '../utils/menus';
 
 export default {
   namespace: 'app',
 
   state: {
-    firstMenuKey: 'Index',
-    secondMenuKey: '',
-    subMenuList: [{ url: '/index/setting', name: '首页', isActive: true }],
+    urltomenu: {
+      firstMenuObj: {
+        key: 'Index',
+        name: '首页'
+      },
+      secondMenuObj: {
+        key: '',
+        name: ''
+      },
+    },
     Provinces: [],
     Citys: [],
     Countys: [],
@@ -16,12 +24,10 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen((location) => {
-        const pathname = location.pathname.split('/');
         dispatch({
-          type: 'save',
+          type: 'urltomenu',
           payload: {
-            firstMenuKey: pathname[1],
-            secondMenuKey: pathname[2]
+            pathname: location.pathname
           },
         });
       });
@@ -61,6 +67,17 @@ export default {
   reducers: {
     save(state, { payload }) {
       return { ...state, ...payload };
+    },
+    urltomenu(state, { payload }) {
+      debugger;
+      const pathname = payload.pathname.split('/');
+      const firstMenuObj = MenuList.find(item => item.key === (pathname[1] ? pathname[1] : 'Index'));
+      const secondMenuObj = firstMenuObj.MenuList.find(item => item.key === (pathname[2] ? pathname[2] : firstMenuObj.key));
+      const urltomenu = {
+        firstMenuObj,
+        secondMenuObj
+      }
+      return { ...state, urltomenu };
     }
   }
 };

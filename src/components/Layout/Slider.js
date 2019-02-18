@@ -38,22 +38,19 @@ class Slider extends Component {
   }
 
   render() {
-    let { app: { firstMenuKey, secondMenuKey } } = this.props;
-    firstMenuKey = firstMenuKey ? firstMenuKey : 'Index';
-    const subMenu = MenuList.find(item => item.key === firstMenuKey);
-    const itemKey = secondMenuKey ? secondMenuKey : subMenu.MenuList[0].key;
+    let { app: { urltomenu: { firstMenuObj, secondMenuObj } } } = this.props;
 
     return (
       <Sider width={200} className={styles.slider}>
         <Menu
           theme='light'
           defaultOpenKeys={['sub1']}
-          selectedKeys={[itemKey]}
+          selectedKeys={[secondMenuObj.key]}
           mode="inline"
           style={{ borderRight: '1px solid #fff' }}
         >
           {
-            this.renderMenuItem(subMenu.MenuList)
+            this.renderMenuItem(firstMenuObj.MenuList)
           }
         </Menu>
       </Sider>

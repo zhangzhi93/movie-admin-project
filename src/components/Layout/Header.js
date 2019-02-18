@@ -26,17 +26,17 @@ class HeaderLayout extends Component {
   }
 
   render() {
-    let { app: { firstMenuKey } } = this.props;
-    firstMenuKey = firstMenuKey ? firstMenuKey : 'index';
+    const { app: { urltomenu: { firstMenuObj } } } = this.props;
 
     return (
       <Header className={styles.header}>
         <div className={styles.logo}>
-          <img src={logo} alt={config.name} />
+          <Icon type="chrome" style={{ fontSize: '30px', color: '#fff', verticalAlign: 'middle', marginTop: '-5px' }} />
+          {/* <img src={logo} alt={config.name} /> */}
           <h2 className={styles.title}>{config.name}</h2>
         </div>
         <Menu
-          selectedKeys={[firstMenuKey]}
+          selectedKeys={[firstMenuObj.key ? firstMenuObj.key : 'Index']}
           mode="horizontal"
           theme="dark"
           className={styles.menu}
