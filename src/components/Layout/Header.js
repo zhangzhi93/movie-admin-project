@@ -5,7 +5,6 @@ import { Layout, Menu, Dropdown, Icon } from 'antd';
 import config from '../../utils/config';
 import { MenuList } from '../../utils/menus';
 import styles from './Header.less';
-import logo from '../../assets/logo.png';
 
 const { Header } = Layout;
 const MenuItem = Menu.Item;

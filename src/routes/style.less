@@ -1,3 +1,16 @@
+@main-color: #fe6900;
+@hover-color: #c47740;
+@blue: #008cff;
+::-webkit-scrollbar {
+  width: 4px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: @blue;
+}
+::-webkit-scrollbar-track {
+  background-color: #bee1eb;
+}
 .Main {
   padding: 0 20px;
   height: calc(~"100vh - 64px");
@@ -23,5 +36,48 @@
     font-size: 26px;
     text-align: center;
     padding: 10px 0;
+  }
+}
+:global {
+  .ant-breadcrumb {
+    padding: 15px 0;
+    font-size: 14px;
+  }
+  .ant-card.search-card {
+    margin-bottom: 10px;
+    .ant-card-body {
+      padding: 15px 20px;
+    }
+    .ant-form-item {
+      margin: 5px 0;
+    }
+    .ant-input,.ant-select{
+      font-size: 12px;
+    }
+    .ant-btn {
+      margin-left: 10px;
+    }
+    label{
+      font-size: 12px;
+    }
+  }
+  .ant-table-thead>tr>th {
+    text-align: center !important;
+    &.ant-table-column-has-actions{
+      background-clip: border-box!important;
+    }
+  }
+  .table-container{
+    background-color: #fff;
+    margin-bottom: 10px;
+  }
+  .ant-table-thead > tr > th
+  .ant-table {
+    background: #fff !important;
+  }
+  .ant-pagination {
+    width: 100%;
+    text-align: center;
+    margin: 16px 0;
   }
 }

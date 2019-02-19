@@ -6,13 +6,15 @@ import styles from './style.less';
 import Header from '../components/Layout/Header';
 import Slider from '../components/Layout/Slider';
 import Index from './IndexPage';
+import StoreList from './StoreManage/StoreList';
+import StoreEdit from './StoreManage/StoreEdit';
 
 const { Content } = Layout;
 const BreadcrumbItem = Breadcrumb.Item;
 
 function IndexPage({ children, app }) {
 
-  const { selectedKeys, userType, storeId } = app;
+  const { urltomenu: { firstMenuObj, secondMenuObj } } = app;
 
   return (
     <Layout>
@@ -21,10 +23,15 @@ function IndexPage({ children, app }) {
         <Slider />
         <Layout className={styles.Main}>
           <Breadcrumb separator=">>">
-            <BreadcrumbItem>首页</BreadcrumbItem>
+            <BreadcrumbItem>{firstMenuObj.name}</BreadcrumbItem>
+            <BreadcrumbItem>{secondMenuObj.name}</BreadcrumbItem>
           </Breadcrumb>
           <Content>
-            <Route path="/Index" exact component={Index} />
+            <Route path="/" exact component={Index} />
+            <Route path="/Index/Home" exact component={Index} />
+            <Route path="/StoreManage/Store" exact component={StoreList} />
+            <Route path="/StoreManage/Store/view" exact component={StoreList} />
+            <Route path="/StoreManage/edit/:id" exact component={StoreEdit} />
           </Content>
         </Layout>
       </Layout>

@@ -1,21 +1,21 @@
 export const MenuList = [{
   key: 'Index',
-  path: '/Index',
+  path: '/Index/Home',
   name: '首页',
   icon: 'home',
   MenuList: [{
     type: "2",
-    key: 'Index',
+    key: 'Home',
     name: '首页',
   }]
 }, {
   key: 'StoreManage',
-  path: '/StoreManage',
+  path: '/StoreManage/Store',
   name: '门店管理',
   icon: 'shop',
   MenuList: [{
     type: "2",
-    key: 'StoreManage',
+    key: 'Store',
     name: '门店管理',
   }]
 }, {

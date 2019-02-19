@@ -1,32 +1,24 @@
 import axios from 'axios';
-import qs from 'qs';
-import config from '../utils/config';
+import Qs from 'qs';
 
 const instance = axios.create({
-  // -------------------------------------------
-  baseURL: process.env.NODE_ENV == 'development' ? '/service1210/' : config.url,
+  baseURL: '/api/',
   headers: {
     'Content-Type': 'application/json',
-    'CsrfToken': config.CsrfToken,
   },
-  // -------------------------------------------
-
-  // transformRequest: [data => qs.stringify(data)],
   // 超时为5s 上线后是3s
-  //timeout: 5000,
-  timeout: 60000,
-  withCredentials: true,
-  paramsSerializer: function (params) {
+  timeout: 5000,
+  paramsSerializer: function(params) {
     for (let key in params) {
-      if (params[key] === '' || params[key] === undefined || params[key] === null) {
+      if (!params[key]) {
         delete params[key];
       }
     }
-    return qs.stringify(params);
+    return Qs.stringify(params, {arrayFormat: 'brackets'});
   },
 });
 
-
+// 请求拦截处理
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
@@ -40,9 +32,6 @@ instance.interceptors.request.use(function (config) {
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
   // 对响应数据做点什么
-  if (response.data.status === 4018 || response.data.status === 4012) {
-    window.location.replace('#/Login');
-  }
   return response;
 }, function (error) {
   // 对响应错误做点什么

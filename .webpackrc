@@ -1,12 +1,11 @@
 {
   "extraBabelPlugins": [
-    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]
+    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }]
   ],
-  "proxy": {
-    "/api": {
-      "target": "http://localhost:8080",
-      "changeOrigin": true,
-      "pathRewrite": { "^/api" : "" }
-    }
+  "theme": {
+    "@primary-color": "#FE6900",
+    "@table-header-bg": "#e0f0ff",
+    "@input-height-base": "28px",
+    "@btn-height-base": "28px"
   }
 }

@@ -69,10 +69,14 @@ export default {
       return { ...state, ...payload };
     },
     urltomenu(state, { payload }) {
-      debugger;
       const pathname = payload.pathname.split('/');
       const firstMenuObj = MenuList.find(item => item.key === (pathname[1] ? pathname[1] : 'Index'));
-      const secondMenuObj = firstMenuObj.MenuList.find(item => item.key === (pathname[2] ? pathname[2] : firstMenuObj.key));
+      let secondMenuObj = firstMenuObj.MenuList.find(item => item.key === (pathname[2] ? pathname[2] : firstMenuObj.key));
+      if (!secondMenuObj) {
+        secondMenuObj = {
+          name: pathname[1]
+        }
+      }
       const urltomenu = {
         firstMenuObj,
         secondMenuObj
