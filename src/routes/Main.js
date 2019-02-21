@@ -8,6 +8,7 @@ import Slider from '../components/Layout/Slider';
 import Index from './IndexPage';
 import StoreList from './StoreManage/StoreList';
 import StoreEdit from './StoreManage/StoreEdit';
+import UserList from './Member/UserList/Index';
 
 const { Content } = Layout;
 const BreadcrumbItem = Breadcrumb.Item;
@@ -32,6 +33,7 @@ function IndexPage({ children, app }) {
             <Route path="/StoreManage/Store" exact component={StoreList} />
             <Route path="/StoreManage/Store/view" exact component={StoreList} />
             <Route path="/StoreManage/edit/:id" exact component={StoreEdit} />
+            <Route path="/Member/UserList" exact component={UserList} />
           </Content>
         </Layout>
       </Layout>

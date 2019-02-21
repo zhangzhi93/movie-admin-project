@@ -220,18 +220,14 @@ class StoreList extends Component {
       title: '操作',
       key: 'action',
       fixed: 'right',
+      width: 260,
       render: record => (
         <div>
-          {resource.indexOf("p23p") > 0 ?
-            <Button type="danger" size="small" onClick={() => this.manageStore(record.id)}>管理</Button>
-            : ""}
-          {resource.indexOf("p22p") > 0 ?
-            <Button type="danger" size="small" onClick={() => this.editStore(record.id)}>编辑</Button>
-            : ""}
+          <Button type="danger" size="small" onClick={() => this.manageStore(record.id)}>管理</Button>
+          <Button type="danger" size="small" onClick={() => this.editStore(record.id)}>编辑</Button>
           <Button size="small" onClick={() => this.downloadCode(record.id)}>下载二维码</Button>
         </div>
       ),
-      width: 300,
     }];
     return (
       <Layout>
@@ -296,29 +292,25 @@ class StoreList extends Component {
                   )}
                 </FormItem>
               </Col>
-              <Col span={8} className={styles.uploadBtnBar}>
-                {resource.indexOf("p21p") > 0 ?
+              <Col span={8}>
+                <FormItem className="text-right">
                   <Button type="primary" ghost>
                     <Link to={'/StoreManage/edit/0'}>新增</Link>
                   </Button>
-                  : ""}
-                <Upload
-                  name='file'
-                  action={`${config.url}/store/store/import`}
-                  headers={{
-                    'CsrfToken': config.CsrfToken,
-                  }}
-                  withCredentials={true}
-                  showUploadList={false}
-                  onChange={this.uploadFile}
-                >
-                  {resource.indexOf("p24p") > 0 ?
+                  <Upload
+                    name='file'
+                    action={`${config.url}/store/store/import`}
+                    headers={{
+                      'CsrfToken': config.CsrfToken,
+                    }}
+                    withCredentials={true}
+                    showUploadList={false}
+                    onChange={this.uploadFile}
+                  >
                     <Button type="primary" ghost>上传</Button>
-                    : ""}
-                </Upload>
-                {resource.indexOf("p25p") > 0 ?
+                  </Upload>
                   <Button type="primary" ghost onClick={this.downloadMB}>下载模板</Button>
-                  : ""}
+                </FormItem>
               </Col>
             </Row>
           </Form>

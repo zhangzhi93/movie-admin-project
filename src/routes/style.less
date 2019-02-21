@@ -39,6 +39,12 @@
   }
 }
 :global {
+  .pull-right {
+    float: right;
+  }
+  .text-right {
+    text-align: right;
+  }
   .ant-breadcrumb {
     padding: 15px 0;
     font-size: 14px;
@@ -51,28 +57,35 @@
     .ant-form-item {
       margin: 5px 0;
     }
-    .ant-input,.ant-select{
+    .ant-input,
+    .ant-select {
       font-size: 12px;
     }
     .ant-btn {
       margin-left: 10px;
     }
-    label{
+    label {
       font-size: 12px;
     }
   }
   .ant-table-thead>tr>th {
     text-align: center !important;
-    &.ant-table-column-has-actions{
-      background-clip: border-box!important;
+    &.ant-table-column-has-actions {
+      background-clip: border-box !important;
     }
   }
-  .table-container{
+  .ant-table-row {
+    .ant-btn+.ant-btn,
+    a+.ant-btn,
+    .ant-btn+a {
+      margin-left: 10px;
+    }
+  }
+  .table-container {
     background-color: #fff;
     margin-bottom: 10px;
   }
-  .ant-table-thead > tr > th
-  .ant-table {
+  .ant-table-thead>tr>th .ant-table {
     background: #fff !important;
   }
   .ant-pagination {

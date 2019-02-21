@@ -14,6 +14,9 @@ app.use(createLoading());
 app.model(require('./models/app').default);
 app.model(require('./models/login').default);
 app.model(require('./models/storeManage').default);
+app.model(require('./models/Member/user').default);
+app.model(require('./models/Member/tag').default);
+app.model(require('./models/Member/group').default);
 
 // 4. Router
 app.router(require('./router').default);

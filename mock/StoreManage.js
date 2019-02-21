@@ -1,6 +1,6 @@
 import Mock from 'mockjs';
 
-let db = Mock.mock({
+const db = Mock.mock({
   'data|56': [
     {
       'id': /^[1-9]\d{6}/,
@@ -34,6 +34,15 @@ let db = Mock.mock({
     }]
 });
 
+const storeList = Mock.mock({
+  'data|15': [
+    {
+      'id': /^[1-9]\d{2,5}/,
+      "name": '@cname',
+      "listImageUrl": '@url'
+    }]
+});
+
 export default {
   'GET /api/store/store': (req, res) => {
     let resData = {
@@ -51,38 +60,10 @@ export default {
     resData.content = db.data.slice((resData.pageNum - 1) * resData.pageSize, resData.pageNum * resData.pageSize);
     resData.pages = Math.ceil(db.data.length / resData.pageSize);
     resData.total = db.data.length;
-    resData.last = resData.pages == resData.page ? true : false;
+    resData.last = resData.pages === resData.page ? true : false;
     res.status(200).json({ status: 0, msg: "SUCCESS", data: resData });
   },
-  'GET /api/getItemInfoById/:id': (req, res) => {
-    let resData = {
-      data: {},
-      status: 200,
-      msg: 'SUCCESS'
-    };
-    const { params: { id } } = req
-    resData.data = db.data.find(item => item.key == id);
-    console.log(resData);
-    res.status(200).json(resData);
+  'GET /api/store/store/option': (req, res) => {
+    res.status(200).json({ status: 0, msg: "SUCCESS", data: storeList.data });
   },
-  'GET /api/editInfo': (req, res) => {
-    const { query } = req;
-    const { Name } = query;
-    if (Name) {
-      res.status(200).json({
-        status: '0',
-        Name: Name,
-        //id: Mock.Random.integer(10, 20)
-      });
-    } else {
-      res.status(200).json({
-        status: '1'
-      });
-    }
-  },
-  'GET /api/user'(req, res) {
-    res.json({
-      message: 'get success!'
-    });
-  }
 }

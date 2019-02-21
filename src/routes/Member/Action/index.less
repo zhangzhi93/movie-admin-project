@@ -1,0 +1,118 @@
+.powerPoints {
+  padding-bottom: 20px;
+  .basicInfo {
+    background: #ffffff;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.20);
+    border-radius: 4px;
+    min-height: 400px;
+    height: auto;
+  }
+  .buttonGroup {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }
+  .buttonContainer {
+    margin-right: 10px;
+    button {
+      border: 1px solid #fe6900;
+      border-radius: 3px;
+      width: 96px;
+      height: 26px;
+    }
+  }
+  .basicInfoTitle {
+    background: #e0f0ff;
+    width: 1020px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    margin-top: 23px;
+    margin-top: 23px;
+    width: 100%;
+  }
+  .basicInfoContent {
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+  .sideSelector {
+    display: flex;
+    margin-left: 30px;
+    margin-top: 18px;
+    height: 40px;
+  }
+  .sideSelectorLabel {
+    display: flex;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #8d9397;
+    letter-spacing: 14px;
+  }
+  .sideSelectorInput {
+    margin-left: 10px;
+  }
+  .functionSideName {
+    background: #eef7ff;
+    border-radius: 4px;
+    width: 960px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-left: 20px;
+    font-family: PingFangSC-Semibold;
+    font-size: 12px;
+    color: #4a93cf;
+  }
+  .functionGroup {
+    margin-left: 68px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+    display: flex;
+  }
+  .linkStyleName {
+    position: relative;
+    text-decoration: underline;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #0c92ff;
+    cursor: pointer;
+    width: fit-content;
+    margin-bottom: 26px;
+    i {
+      position: absolute;
+      display: none;
+      top: -8px;
+      right: -8px;
+      color: #f04134;
+      font-size: 18px;
+      z-index: 9;
+    }
+    &:hover {
+      i {
+        display: inline-block;
+      }
+    }
+  }
+  .functionPointGrid {
+    flex: 1;
+    margin-left: 40px;
+  }
+}
+
+.formButtonGroup {
+  display: flex;
+  justify-content: space-between;
+}
+
+// 由于不知道被谁全局设置了 btn 的 padding 为0 单独处理下
+:global {
+  .function-points-modal {
+    .ant-modal-footer {
+      .ant-btn {
+        padding: 0 15px;
+      }
+    }
+  }
+}
