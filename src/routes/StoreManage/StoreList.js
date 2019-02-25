@@ -8,10 +8,7 @@ import styles from './index.less';
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
-const formItemLayout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
-};
+const { formItemLayout } = config;
 
 class StoreList extends Component {
   constructor(props) {
@@ -169,7 +166,6 @@ class StoreList extends Component {
     const { pagination } = this.state;
     const { getStoreListData: { content, total } } = storeManage;
     const { getFieldDecorator } = form;
-    const { resource = "" } = this.props.app;
     const columns = [{
       title: '门店编号',
       dataIndex: 'id',
@@ -222,11 +218,11 @@ class StoreList extends Component {
       fixed: 'right',
       width: 260,
       render: record => (
-        <div>
-          <Button type="danger" size="small" onClick={() => this.manageStore(record.id)}>管理</Button>
-          <Button type="danger" size="small" onClick={() => this.editStore(record.id)}>编辑</Button>
+        <>
+          <Button type="primary" size="small" onClick={() => this.manageStore(record.id)}>管理</Button>
+          <Button type="primary" size="small" onClick={() => this.editStore(record.id)}>编辑</Button>
           <Button size="small" onClick={() => this.downloadCode(record.id)}>下载二维码</Button>
-        </div>
+        </>
       ),
     }];
     return (

@@ -1,0 +1,189 @@
+.col_5 {
+  width: 20%;
+  float: left;
+  flex: 0 0 auto;
+  padding: 0 5px !important;
+  box-sizing: border-box;
+}
+.card {
+  :global {
+    .ant-card-body {
+      padding: 0px !important;
+    }
+  }
+  .content {
+    padding: 5px;
+  }
+  .item {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #efefef;
+    position: relative;
+    &.active {
+      border: 2px solid #4a93cf;
+    }
+    .deleteBtn {
+      display: block;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 15px;
+      height: 15px;
+      line-height: 12px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 9;
+      font-style: normal;
+    }
+    .poster {
+      position: relative;
+      height: 150px;
+      overflow: hidden;
+      img {
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+      }
+      strong {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: #fff;
+        padding: 4px 5px;
+        font-size: 14px;
+        font-weight: normal;
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+    }
+    .band {
+      overflow: hidden;
+      display: flex;
+      p {
+        float: left;
+        width: 70%;
+        flex: 1;
+        font-size: 12px;
+        padding: 10px;
+      }
+      img {
+        float: right;
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+}
+.imageCard {
+  margin-bottom: 10px;
+  :global {
+    .ant-card-body {
+      padding: 0px !important;
+    }
+  }
+}
+.ant-card-cover {
+  height: 200px;
+  overflow: hidden;
+  text-align: center;
+  img {
+    height: 100%;
+    vertical-align: middle;
+  }
+}
+.quill {
+  width: 600px;
+  height: 200px;
+  padding-bottom: 40px;
+}
+.label_title {
+  display: inline-block;
+  width: 4rem;
+}
+.img {
+  width: 100%;
+  height: 100%;
+}
+.dotted {
+  border: 1px dotted;
+  text-align: center;
+  padding: 20px !important;
+  cursor: pointer;
+  margin-bottom: 0 !important;
+  border-bottom: 1px dotted !important;
+}
+:global {
+  .anticon-plus {
+    font-size: 24px;
+  }
+}
+.shTable {
+  :global {
+    .ant-table-content {
+      min-height: auto !important;
+    }
+    table {
+      padding: 0 !important;
+    }
+  }
+}
+.seletBtn {
+  display: inline-block;
+  border: 1px dashed #d9d9d9;
+  cursor: pointer;
+  padding: 40px 0;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+  .seletText {
+    font-size: 12px;
+  }
+}
+.shade {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  :global {
+    .anticon-check {
+      color: #fff;
+      font-size: 28px;
+      line-height: 120px;
+    }
+  }
+}
+.userTabs {
+  :global {
+    .ant-tabs-bar {
+      margin-bottom: 5px;
+    }
+    .ant-tabs-content {
+      height: 55vh;
+    }
+    .ant-row {
+      height: 100%;
+      overflow-x: auto;
+    }
+  }
+}
+.container {
+  h2 {
+    margin-bottom: 8px;
+  }
+  .poster {
+    img {
+      width: 100%;
+    }
+  }
+  .content {
+    img {
+      max-width: 100%
+    }
+  }
+}

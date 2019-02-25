@@ -1,0 +1,138 @@
+.modal {
+  margin: 15px 0 15px 35px;
+  color: rgba(37, 48, 57, 0.60);
+  text-align: center;
+}
+:global(.vertical-center-modal) {
+  text-align: center;
+  white-space: nowrap;
+  :global(.ant-modal) {
+    display: inline-block;
+    vertical-align: middle;
+    top: 0;
+    text-align: left;
+  }
+}
+:global(.vertical-center-modal:before) {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  width: 0;
+}
+.ImageTextcard {
+  margin-bottom: 10px;
+  :global {
+    .ant-card-body {
+      padding: 0px !important;
+    }
+    .ant-card-actions>li {
+      margin: 8px 0;
+    }
+  }
+  .container {
+    height: 280px;
+    overflow-y: auto;
+  }
+  .item {
+    padding: 0 5px;
+    &:first-child {
+      padding: 0;
+    }
+    &.active {
+      border: 2px solid;
+    }
+    .poster {
+      position: relative;
+      height: 100px;
+      overflow: hidden;
+      img {
+        width: 100%;
+        vertical-align: middle;
+      }
+      strong {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: #fff;
+        padding: 4px 5px;
+        font-size: 14px;
+        font-weight: normal;
+        background-color: rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        /*! autoprefixer: off */
+        -webkit-box-orient: vertical;
+        /*! autoprefixer: on */
+      }
+    }
+    .band {
+      display: flex;
+      padding: 8px;
+      border-bottom: 1px solid #efefef;
+      .subtitle {
+        flex: 1;
+        width: 70%;
+        margin-right: 5px;
+        p {
+          margin-bottom: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          /*! autoprefixer: off */
+          -webkit-box-orient: vertical;
+          /*! autoprefixer: on */
+          -webkit-line-clamp: 3;
+          font-size: 12px;
+          height: 50px;
+        }
+      }
+      .subImage {
+        width: 50px;
+        img {
+          height: 50px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+.imageCard {
+  margin-bottom: 10px;
+  :global {
+    .ant-card-body {
+      padding: 0px !important;
+    }
+    .ant-card-actions>li {
+      margin: 8px 0;
+    }
+    .ant-card-cover {
+      height: 200px;
+      overflow: hidden;
+      text-align: center;
+      img {
+        height: 100%;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+.shade {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  :global {
+    .anticon-check {
+      color: #fff;
+      font-size: 28px;
+      line-height: 200px;
+    }
+  }
+}

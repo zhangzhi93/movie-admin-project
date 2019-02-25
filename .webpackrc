@@ -6,6 +6,9 @@
     "@primary-color": "#FE6900",
     "@table-header-bg": "#e0f0ff",
     "@input-height-base": "28px",
-    "@btn-height-base": "28px"
+    "@btn-height-base": "28px",
+    "@card-head-color": "#4a93cf",
+    "@card-head-background": "#e0f0ff",
+    "@card-head-padding": "10px"
   }
 }

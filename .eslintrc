@@ -1,3 +1,6 @@
 {
-  "extends": "umi"
+  "extends": "umi",
+  "rules": {
+    "no-unused-expressions": "off"
+  }
 }

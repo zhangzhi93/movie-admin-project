@@ -328,6 +328,7 @@ class UserList extends Component {
       dataIndex: 'birthday',
       key: 'birthday',
       align: 'center',
+      width: 200,
       render: text => (<span>{(text || '').split(' ')[0]}</span>)
     }, {
       title: '用户标签',
@@ -357,10 +358,10 @@ class UserList extends Component {
       fixed: 'right',
       width: 150,
       render: record => (
-        <div>
-          <Link to={`/Member/UserList/info/${record.id}`}><Button size="small" type="danger">编辑</Button></Link>
+        <>
+          <Link to={`/Member/UserList/info/${record.id}`}><Button size="small" type="primary">编辑</Button></Link>
           <Button size="small" onClick={() => this.freezeOrRecover(record)}>{record.memberStatus === 0 ? '冻结' : '恢复'}</Button>
-        </div>
+        </>
       ),
     }];
     return (
@@ -496,7 +497,7 @@ class UserList extends Component {
             dataSource={content}
             rowSelection={rowSelection}
             onChange={this.handleTableChange}
-            scroll={{ x: 2050 }}
+            scroll={{ x: 2250 }}
             pagination={{
               ...pagination,
               total,

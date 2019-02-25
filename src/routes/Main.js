@@ -9,6 +9,9 @@ import Index from './IndexPage';
 import StoreList from './StoreManage/StoreList';
 import StoreEdit from './StoreManage/StoreEdit';
 import UserList from './Member/UserList/Index';
+import ImageText from './Tweets/ImageText/Index';
+import Picture from './Tweets/Picture/Index';
+import TypesList from './Tweets/Types/Index';
 
 const { Content } = Layout;
 const BreadcrumbItem = Breadcrumb.Item;
@@ -34,6 +37,9 @@ function IndexPage({ children, app }) {
             <Route path="/StoreManage/Store/view" exact component={StoreList} />
             <Route path="/StoreManage/edit/:id" exact component={StoreEdit} />
             <Route path="/Member/UserList" exact component={UserList} />
+            <Route path="/Tweets/ImageText" exact component={ImageText} />
+            <Route path="/Tweets/Picture" exact component={Picture} />
+            <Route path="/Tweets/TypesList" exact component={TypesList} />
           </Content>
         </Layout>
       </Layout>

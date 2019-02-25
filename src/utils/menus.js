@@ -56,8 +56,8 @@ export const MenuList = [{
     name: '图文管理',
   }, {
     type: "1",
-    key: 'Images',
-    path: '/Tweets/Images',
+    key: 'Picture',
+    path: '/Tweets/Picture',
     name: '图片管理',
   }, {
     type: "1",
