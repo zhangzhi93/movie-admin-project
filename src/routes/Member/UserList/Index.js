@@ -260,10 +260,10 @@ class UserList extends Component {
     const { form: { getFieldDecorator }, storeManage: { getStoreOptionData }, memeberGroup: { getMemberGroupOptionData }, memeberTag: { getMemberTagOptionData }, memberUser: { getUserListData: { content, total } }, loading } = this.props;
     const { pagination, fetching, selectedRowKeys, visible, modalTitle } = this.state;
     const rowSelection = {
+      fixed: true,
       selectedRowKeys,
       onChange: this.onSelectChange,
     };
-    const { resource = "" } = this.props.app;
     const isLoading = loading.effects['memberUser/getUserList'];
 
     const columns = [{
@@ -392,7 +392,7 @@ class UserList extends Component {
                     <RangePicker
                       format="YYYY-MM-DD hh:mm:ss"
                       showTime
-                      style={{width:'100%'}}
+                      style={{ width: '100%' }}
                       getCalendarContainer={trigger => trigger.parentNode}
                     />,
                   )}
