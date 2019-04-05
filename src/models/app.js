@@ -5,16 +5,12 @@ export default {
   namespace: 'app',
 
   state: {
-    urltomenu: {
-      firstMenuObj: {
-        key: 'Index',
-        name: '首页'
-      },
-      secondMenuObj: {
-        key: '',
-        name: ''
-      },
+    urlToMenu: {
+      MenuItem: {},
+      urlMenuArr: [],
+      depper: 1
     },
+    breadcrumb: [],
     Provinces: [],
     Citys: [],
     Countys: [],
@@ -25,7 +21,7 @@ export default {
     setup({ dispatch, history }) {
       history.listen((location) => {
         dispatch({
-          type: 'urltomenu',
+          type: 'urlToMenu',
           payload: {
             pathname: location.pathname
           },
@@ -68,20 +64,17 @@ export default {
     save(state, { payload }) {
       return { ...state, ...payload };
     },
-    urltomenu(state, { payload }) {
-      const pathname = payload.pathname.split('/');
-      const firstMenuObj = MenuList.find(item => item.key === (pathname[1] ? pathname[1] : 'Index'));
-      let secondMenuObj = firstMenuObj.MenuList.find(item => item.key === (pathname[2] ? pathname[2] : firstMenuObj.key));
-      if (!secondMenuObj) {
-        secondMenuObj = {
-          name: pathname[1]
-        }
+    urlToMenu(state, { payload }) {
+      const urlMenu = payload.pathname.split('/.')[0];
+      const urlMenuArr = urlMenu.split('/');
+      urlMenuArr.shift();
+      const MenuItem = MenuList.find(item => item.key === (urlMenuArr[0] ? urlMenuArr[0] : 'Index'));
+      //
+      const urlToMenu = {
+        MenuItem,
+        urlMenuArr,
       }
-      const urltomenu = {
-        firstMenuObj,
-        secondMenuObj
-      }
-      return { ...state, urltomenu };
+      return { ...state, urlToMenu };
     }
   }
 };

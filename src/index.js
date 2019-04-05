@@ -17,6 +17,7 @@ app.model(require('./models/storeManage').default);
 app.model(require('./models/Member/user').default);
 app.model(require('./models/Member/tag').default);
 app.model(require('./models/Member/group').default);
+app.model(require('./models/Member/order').default);
 app.model(require('./models/Tweets/imagetext').default);
 app.model(require('./models/Tweets/picture').default);
 app.model(require('./models/Tweets/types').default);

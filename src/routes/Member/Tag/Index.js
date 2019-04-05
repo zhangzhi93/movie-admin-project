@@ -204,9 +204,7 @@ class TagList extends Component {
               </Col>
               <Col span={6} style={{ textAlign: 'right' }}>
                 <Link to={`/Member/TagList/edit/${0}`}>
-                  {resource.indexOf("p39p") > 0 ?
-                    <Button type="primary" ghost>新增</Button>
-                    : ""}
+                  <Button type="primary" ghost>新增</Button>
                 </Link>
               </Col>
             </Row>

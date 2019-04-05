@@ -1,17 +1,16 @@
 import { Component } from 'react';
 import { connect } from 'dva';
-import { Layout, Button, Table, Card, Form, Row, Col, Input, Breadcrumb, message, Modal } from 'antd';
+import { Link } from 'dva/router';
+import { Layout, Button, Table, Card, Modal, Form, Row, Col, Input, message } from 'antd';
 import UModal from './Modal';
+import config from '../../../utils/config';
 import style from '../index.less';
 
-const confirm = Modal.confirm;
 const FormItem = Form.Item;
-const formItemLayout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 18 },
-};
+const confirm = Modal.confirm;
+const { formItemLayout } = config;
 
-class GroupList extends Component {
+class TypesList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,7 +20,7 @@ class GroupList extends Component {
         page: 1,
         pageSize: 10,
       },
-      groupInfoById: {
+      typesInfoById: {
         id: '',
         name: '',
         description: ''
@@ -32,7 +31,7 @@ class GroupList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'memeberGroup/getMemberGroupList',
+      type: 'types/getClassifyList',
       payload: {
         page: 1,
         rows: 10
@@ -56,18 +55,18 @@ class GroupList extends Component {
       rows: pageSize,
     };
     dispatch({
-      type: 'memeberGroup/getMemberGroupList',
+      type: 'types/getClassifyList',
       payload: query,
     });
   }
 
-  addGroup = (values, id) => {
+  addTypes = (values, id) => {
     const { dispatch } = this.props;
     const { searchParams, pagination } = this.state;
 
-    let url = 'memeberGroup/addMemberGroup';
+    let url = 'types/addClassify';
     if (id) {
-      url = 'memeberGroup/updateMemberGroup';
+      url = 'types/updateClassify';
       values.id = id;
     }
     dispatch({
@@ -75,12 +74,12 @@ class GroupList extends Component {
       payload: values,
       callback: (res) => {
         if (res && res.msg === 'SUCCESS') {
-          message.success(`组别${id ? '更新' : '添加'}成功`);
+          message.success(`分类${id ? '更新' : '添加'}成功`);
           this.setState({
             visible: false
           })
           dispatch({
-            type: 'memeberGroup/getMemberGroupList',
+            type: 'types/getClassifyList',
             payload: {
               ...searchParams,
               ...pagination
@@ -99,17 +98,47 @@ class GroupList extends Component {
     })
   }
 
-  editGroup = (id) => {
+  deleteTypes = (id) => {
+    const { dispatch } = this.props;
+    const { searchParams, pagination } = this.state;
+    confirm({
+      title: '删除',
+      content: '确定删除分类吗？',
+      okText: '确定',
+      okType: 'danger',
+      cancelText: '取消',
+      onOk() {
+        dispatch({
+          type: 'types/deleteClassify',
+          payload: { id },
+          callback: (res) => {
+            if (res && res.msg === 'SUCCESS') {
+              message.success("删除成功");
+              dispatch({
+                type: 'types/getClassifyList',
+                payload: {
+                  ...searchParams,
+                  ...pagination
+                }
+              })
+            }
+          }
+        })
+      }
+    });
+  }
+
+  editTypes = (id) => {
     const { dispatch } = this.props;
     if (id) {
       dispatch({
-        type: 'memeberGroup/getMemberGroupById',
+        type: 'types/getClassifyById',
         payload: { id },
         callback: (res) => {
           if (res && res.msg === 'SUCCESS') {
             this.setState({
               visible: true,
-              groupInfoById: {
+              typesInfoById: {
                 id: id,
                 name: res.data.name,
                 description: res.data.description
@@ -121,44 +150,13 @@ class GroupList extends Component {
     } else {
       this.setState({
         visible: true,
-        groupInfoById: {
+        typesInfoById: {
           id: '',
           name: '',
           description: ''
         }
       })
     }
-  }
-
-  deleteGroup = (id) => {
-    const { dispatch } = this.props;
-    const { searchParams, pagination } = this.state;
-    confirm({
-      title: '删除',
-      content: '确定删除吗？',
-      okText: '确定',
-      okType: 'danger',
-      cancelText: '取消',
-      onOk() {
-        dispatch({
-          type: 'memeberGroup/deleteMemberGroup',
-          payload: { id },
-          callback: (res) => {
-            if (res && res.msg === 'SUCCESS') {
-              message.success("删除成功");
-              dispatch({
-                type: 'memeberGroup/getMemberGroupList',
-                payload: {
-                  ...searchParams,
-                  page: pagination.page,
-                  rows: pagination.pageSize,
-                }
-              })
-            }
-          }
-        })
-      }
-    });
   }
 
   handleSubmit = (e) => {
@@ -182,56 +180,58 @@ class GroupList extends Component {
         rows: pagination.pageSize,
       };
       dispatch({
-        type: 'memeberGroup/getMemberGroupList',
+        type: 'types/getClassifyList',
         payload,
       });
     });
   }
 
   render() {
-    const { form, memeberGroup } = this.props;
-    const { pagination, visible, groupInfoById } = this.state;
-    const { getMemberGroupListData: { content, total } } = memeberGroup;
-    const { getFieldDecorator } = form;
+    const { form: { getFieldDecorator }, types } = this.props;
+    const { pagination, visible, typesInfoById } = this.state;
+    const { getClassifyListData: { content, total } } = types;
 
     const columns = [{
-      title: '组别名称',
+      title: '分类名称',
       dataIndex: 'name',
       key: 'name',
+      align: 'center',
     }, {
-      title: '组别描述',
+      title: '分类描述',
       dataIndex: 'description',
       key: 'description',
-    }, {
-      title: '组内人数',
-      dataIndex: 'memberNumber',
-      key: 'memberNumber',
+      align: 'center',
+      width: 300,
     }, {
       title: '创建人',
       dataIndex: 'creatorName',
       key: 'creatorName',
+      align: 'center',
     }, {
       title: '创建时间',
       dataIndex: 'gmtCreate',
       key: 'gmtCreate',
+      align: 'center',
     }, {
       title: '最后修改人',
       dataIndex: 'updatorName',
       key: 'updatorName',
+      align: 'center',
     }, {
       title: '最后修改时间',
       dataIndex: 'gmtModified',
-      key: 'gmtModified'
+      key: 'gmtModified',
+      align: 'center',
     }, {
       title: '操作',
       key: 'action',
       fixed: 'right',
       width: '150px',
       render: record => (
-        <div>
-          <Button size="small" type="danger" onClick={() => { this.editGroup(record.id) }}>编辑</Button>
-          <Button size="small" onClick={() => { this.deleteGroup(record.id) }}>删除</Button>
-        </div>
+        <>
+          <Button size="small" type="primary" onClick={() => { this.editTypes(record.id) }}>编辑</Button>
+          <Button size="small" onClick={() => { this.deleteTypes(record.id) }}>删除</Button>
+        </>
       ),
     }];
     return (
@@ -240,43 +240,36 @@ class GroupList extends Component {
           <Form onSubmit={this.handleSubmit}>
             <Row>
               <Col span={8}>
-                <FormItem label="组别名称" {...formItemLayout}>
+                <FormItem label="分类名称" {...formItemLayout}>
                   {getFieldDecorator('name', {
                     rules: []
                   })(
-                    <Input maxLength="15" placeholder="请输入" />,
+                    <Input size="default" placeholder="请输入" />,
                   )}
                 </FormItem>
               </Col>
               <Col span={8}>
-                <FormItem label="组别描述" {...formItemLayout}>
+                <FormItem label="分类描述" {...formItemLayout}>
                   {getFieldDecorator('description', {
                     rules: []
                   })(
-                    <Input maxLength="15" placeholder="请输入" />,
+                    <Input size="default" placeholder="请输入" />,
                   )}
                 </FormItem>
               </Col>
               <Col span={4}>
                 <FormItem>
-                  <Button type="primary" htmlType="submit" ghost>查询</Button>
+                  <Button type="primary" htmlType="submit" ghost>搜索</Button>
                 </FormItem>
               </Col>
-              <Col span={4} style={{ textAlign: 'right' }}>
-                <FormItem>
-                  <Button type="primary" ghost onClick={() => { this.editGroup() }}>新增</Button>
+              <Col span={4}>
+                <FormItem className="text-right">
+                  <Button type="primary" ghost onClick={() => { this.editTypes() }}>新增</Button>
                 </FormItem>
               </Col>
             </Row>
           </Form>
         </Card>
-        <UModal
-          visible={visible}
-          onOk={(stValue, id) => { this.addGroup(stValue, id) }}
-          onCancel={this.close}
-          groupInfoById={groupInfoById}
-        >
-        </UModal>
         <div className="table-container">
           <Table
             rowKey="id"
@@ -295,21 +288,28 @@ class GroupList extends Component {
             }}
           />
         </div>
+        <UModal
+          visible={visible}
+          onOk={(stValue, id) => { this.addTypes(stValue, id) }}
+          onCancel={this.close}
+          typesInfoById={typesInfoById}
+        >
+        </UModal>
       </Layout >
     );
   }
 }
 
-GroupList.propTypes = {};
+TypesList.propTypes = {};
 
 
-function mapStateToProps({ memeberGroup, app }) {
+function mapStateToProps({ types, app }) {
   return {
-    memeberGroup,
+    types,
     app,
   };
 }
 
-const WrappedGroupList = Form.create()(GroupList);
+const WrappedTypesList = Form.create()(TypesList);
 
-export default connect(mapStateToProps)(WrappedGroupList);
+export default connect(mapStateToProps)(WrappedTypesList);

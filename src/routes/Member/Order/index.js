@@ -7,6 +7,7 @@ import style from '../index.less';
 
 const FormItem = Form.Item;
 const { RangePicker } = DatePicker;
+const Option = Select.Option;
 const formItemLayout = {
   labelCol: { span: 6 },
   wrapperCol: { span: 18 },
@@ -104,11 +105,10 @@ class OrderList extends Component {
   }
 
   render() {
-    const { form, memeberOrder, store: { getStoreOptionData }, } = this.props;
+    const { form, memeberOrder, storeManage: { getStoreOptionData } } = this.props;
     const { pagination } = this.state;
     const { getMemberOrderListData: { content, total }, getMemberOrderPlatformData } = memeberOrder;
     const { getFieldDecorator } = form;
-    const { resource = "" } = this.props.app;
 
     const columns = [{
       title: '用户ID',
@@ -159,29 +159,23 @@ class OrderList extends Component {
 
     return (
       <Layout>
-        <Breadcrumb separator=">>">
-          <Breadcrumb.Item>用户管理</Breadcrumb.Item>
-          <Breadcrumb.Item>订单列表</Breadcrumb.Item>
-        </Breadcrumb>
-        <Card>
+        <Card hoverable className="search-card">
           <Form onSubmit={this.handleSubmit}>
             <Row>
-              <Col span={6}>
+              <Col span={8}>
                 <FormItem label="手机号" {...formItemLayout}>
                   {getFieldDecorator('mobileNo', {
                   })(
-                    <Input maxLength="15" size="default" style={{ width: 180 }} placeholder="请输入手机号" />,
+                    <Input maxLength="15" placeholder="请输入手机号" />,
                   )}
                 </FormItem>
               </Col>
-              <Col span={6}>
+              <Col span={8}>
                 <FormItem label="购票时间" {...formItemLayout}>
                   {getFieldDecorator('orderTime')(
-                    <RangePicker
-                      style={{ width: 180 }}
-                      format="YYYY-MM-DD hh:mm:ss"
+                    <RangePicker format="YYYY-MM-DD hh:mm:ss"
                       showTime
-                      size="default"
+                      style={{ width: '100%' }}
                       getCalendarContainer={trigger => trigger.parentNode}
                     />,
                   )}
@@ -189,13 +183,10 @@ class OrderList extends Component {
               </Col>
             </Row>
             <Row>
-              <Col span={6}>
+              <Col span={8}>
                 <FormItem label="购票影院" {...formItemLayout}>
                   {getFieldDecorator('orderStoreId', {})(
-                    <Select
-                      size="default"
-                      style={{ width: 180 }}
-                      placeholder="请选择"
+                    <Select placeholder="请选择"
                       getPopupContainer={trigger => trigger.parentNode}
                     >
                       <Option value="">请选择</Option>
@@ -210,24 +201,21 @@ class OrderList extends Component {
                   )}
                 </FormItem>
               </Col>
-              <Col span={6}>
+              <Col span={8}>
                 <FormItem label="影片名称" {...formItemLayout}>
                   {getFieldDecorator('filmName', {
                   })(
-                    <Input maxLength="15" size="default" style={{ width: 180 }} placeholder="请输入影片名称" />,
+                    <Input maxLength="15" placeholder="请输入影片名称" />,
                   )}
                 </FormItem>
               </Col>
             </Row>
             <Row>
-              <Col span={6}>
+              <Col span={8}>
                 <FormItem label="影片类型" {...formItemLayout}>
                   {getFieldDecorator('filmType', {
                   })(
-                    <Select
-                      size="default"
-                      style={{ width: 180 }}
-                      placeholder="请选择"
+                    <Select placeholder="请选择"
                       allowClear
                     >
                       <Option value="爱情片">爱情片</Option>
@@ -260,14 +248,11 @@ class OrderList extends Component {
                   )}
                 </FormItem>
               </Col>
-              <Col span={6}>
+              <Col span={8}>
                 <FormItem label="购票渠道" {...formItemLayout}>
                   {getFieldDecorator('orderPlatform', {
                   })(
-                    <Select
-                      size="default"
-                      style={{ width: 180 }}
-                      placeholder="请选择"
+                    <Select placeholder="请选择"
                       allowClear
                     >
                       {
@@ -279,13 +264,15 @@ class OrderList extends Component {
                   )}
                 </FormItem>
               </Col>
-              <Col span={6}>
-                <Button type="primary" htmlType="submit" ghost>查询</Button>
+              <Col span={4}>
+                <FormItem>
+                  <Button type="primary" htmlType="submit" ghost>查询</Button>
+                </FormItem>
               </Col>
-              <Col span={6} style={{ textAlign: 'right' }}>
-              {resource.indexOf("p33p") > 0 ?
-                <Button type="primary" ghost onClick={this.doExportExcel}>导出</Button>
-                : ""}
+              <Col span={4} style={{ textAlign: 'right' }}>
+                <FormItem className="text-right">
+                  <Button type="primary" ghost onClick={this.doExportExcel}>导出</Button>
+                </FormItem>
               </Col>
             </Row>
           </Form>
@@ -316,10 +303,10 @@ class OrderList extends Component {
 OrderList.propTypes = {};
 
 
-function mapStateToProps({ memeberOrder, store, app }) {
+function mapStateToProps({ memeberOrder, storeManage, app }) {
   return {
     memeberOrder,
-    store,
+    storeManage,
     app,
   };
 }

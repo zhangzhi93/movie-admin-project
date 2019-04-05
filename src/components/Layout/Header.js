@@ -25,7 +25,7 @@ class HeaderLayout extends Component {
   }
 
   render() {
-    const { app: { urltomenu: { firstMenuObj } } } = this.props;
+    const { app: { urlToMenu: { urlMenuArr } } } = this.props;
 
     return (
       <Header className={styles.header}>
@@ -35,7 +35,7 @@ class HeaderLayout extends Component {
           <h2 className={styles.title}>{config.name}</h2>
         </div>
         <Menu
-          selectedKeys={[firstMenuObj.key ? firstMenuObj.key : 'Index']}
+          selectedKeys={[urlMenuArr[0] ? urlMenuArr[0] : 'Index']}
           mode="horizontal"
           theme="dark"
           className={styles.menu}
