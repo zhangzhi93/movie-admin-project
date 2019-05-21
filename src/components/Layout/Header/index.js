@@ -2,9 +2,9 @@ import { Component } from 'react';
 import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Layout, Menu, Dropdown, Icon } from 'antd';
-import config from '../../utils/config';
-import { MenuList } from '../../utils/menus';
-import styles from './Header.less';
+import config from '../../../utils/config';
+import MenuList from '../../../utils/menus';
+import styles from './style.less';
 
 const { Header } = Layout;
 const MenuItem = Menu.Item;
@@ -25,7 +25,7 @@ class HeaderLayout extends Component {
   }
 
   render() {
-    const { app: { urlToMenu: { urlMenuArr } } } = this.props;
+    const { app: { selectedMenuArray } } = this.props;
 
     return (
       <Header className={styles.header}>
@@ -35,7 +35,7 @@ class HeaderLayout extends Component {
           <h2 className={styles.title}>{config.name}</h2>
         </div>
         <Menu
-          selectedKeys={[urlMenuArr[0] ? urlMenuArr[0] : 'Index']}
+          selectedKeys={[selectedMenuArray[0]]}
           mode="horizontal"
           theme="dark"
           className={styles.menu}

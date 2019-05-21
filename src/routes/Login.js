@@ -33,7 +33,7 @@ class Login extends React.Component {
             message.success("登陆成功");
             // instance.defaults.headers.common['CsrfToken'] = Cookies.get('XSRF-TOKEN', { domain: 'crland.com.cn' });
             dispatch({
-              type: 'app/getAuthorizeMenuList',
+              type: 'common/getAuthorizeMenuList',
               callback: res => {
                 if (res.msg == 'SUCCESS') {
                   localStorage.setItem('userType', res.data.userType);
@@ -88,10 +88,10 @@ class Login extends React.Component {
 Login.propTypes = {
 };
 
-function mapStateToProps({ login, app }) {
+function mapStateToProps({ login, common }) {
   return {
     login,
-    app
+    common
   };
 }
 

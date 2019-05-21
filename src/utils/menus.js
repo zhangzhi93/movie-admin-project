@@ -1,9 +1,9 @@
-export const MenuList = [{
+export default [{
   key: 'Index',
-  path: '/Index',
+  path: '/Index/Home',
   name: '首页',
   icon: 'home',
-  MenuList: [{
+  children: [{
     type: "2",
     key: 'Home',
     path: '/Home',
@@ -11,10 +11,10 @@ export const MenuList = [{
   }]
 }, {
   key: 'StoreManage',
-  path: '/StoreManage',
+  path: '/StoreManage/Store',
   name: '门店管理',
   icon: 'shop',
-  MenuList: [{
+  children: [{
     type: "2",
     key: 'Store',
     path: '/Store',
@@ -22,10 +22,10 @@ export const MenuList = [{
   }]
 }, {
   key: 'Member',
-  path: '/Member',
+  path: '/Member/UserList',
   name: '用户管理',
   icon: 'user',
-  MenuList: [{
+  children: [{
     type: "1",
     key: 'UserList',
     path: 'UserList',
@@ -48,10 +48,10 @@ export const MenuList = [{
   }]
 }, {
   key: 'Tweets',
-  path: '/Tweets',
+  path: '/Tweets/ImageText',
   name: '推文管理',
   icon: 'book',
-  MenuList: [{
+  children: [{
     type: "1",
     key: 'ImageText',
     path: '/ImageText',
@@ -74,10 +74,10 @@ export const MenuList = [{
   }]
 }, {
   key: 'Message',
-  path: '/Message',
+  path: '/Message/GroupSend',
   name: '消息中心',
   icon: 'message',
-  MenuList: [{
+  children: [{
     type: "1",
     key: 'GroupSend',
     path: '/GroupSend',
@@ -87,7 +87,7 @@ export const MenuList = [{
     key: 'Wechat',
     path: '/Wechat',
     name: '微信配置',
-    MenuList: [{
+    children: [{
       type: "1",
       key: 'WechatMenu',
       path: '/WechatMenu',
@@ -111,10 +111,10 @@ export const MenuList = [{
   }]
 }, {
   key: 'System',
-  path: '/System',
+  path: '/System/Account',
   name: '系统管理',
   icon: 'setting',
-  MenuList: [{
+  children: [{
     type: "1",
     key: 'Account',
     path: '/Account',

@@ -3,7 +3,7 @@ import { connect } from 'dva';
 import { Link, routerRedux } from 'dva/router';
 import { Form, Card, Select, message, Col, Icon, DatePicker, Input, Radio, Button, Modal, Upload, Switch, Breadcrumb } from 'antd';
 import config from '../../utils/config';
-import styles from './index.less';
+import styles from './style.less';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -21,6 +21,12 @@ const formItemLayout = {
   },
 };
 
+@connect(({ store, common, loading }) => ({
+  store,
+  common,
+  loading: loading.models.store,
+}))
+@Form.create()
 class StoreEdit extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +49,7 @@ class StoreEdit extends Component {
     const _this = this;
 
     dispatch({
-      type: 'app/getProvinces',
+      type: 'common/getProvinces',
       callback: function (res) {
         if (id !== '0') {
           dispatch({
@@ -72,14 +78,14 @@ class StoreEdit extends Component {
                 evaluateStatus: evaluateStatus == 1 ? true : false
               });
               dispatch({
-                type: 'app/getCitys',
+                type: 'common/getCitys',
                 payload: {
                   id: res2.data.provinceId
                 },
                 callback: function (city) {
                   if (city.status === 0) {
                     dispatch({
-                      type: 'app/getCountys',
+                      type: 'common/getCountys',
                       payload: {
                         id: res2.data.cityId
                       },
@@ -117,7 +123,7 @@ class StoreEdit extends Component {
   handleChangeProvince = (value) => {
     const { dispatch, form } = this.props;
     dispatch({
-      type: 'app/getCitys',
+      type: 'common/getCitys',
       payload: {
         id: value
       },
@@ -136,7 +142,7 @@ class StoreEdit extends Component {
   handleChangeCity = (value) => {
     const { dispatch, form } = this.props;
     dispatch({
-      type: 'app/getCountys',
+      type: 'common/getCountys',
       payload: {
         id: value
       },
@@ -190,7 +196,7 @@ class StoreEdit extends Component {
         return;
       }
       let requestUrl = 'store/addStore';
-      if (id != 0) {
+      if (id !== 0) {
         requestUrl = 'store/updateStore';
       }
       values.evaluateStatus = evaluateStatus ? 1 : 0;
@@ -248,14 +254,14 @@ class StoreEdit extends Component {
                     evaluateStatus: evaluateStatus == 1 ? true : false
                   });
                   dispatch({
-                    type: 'app/getCitys',
+                    type: 'common/getCitys',
                     payload: {
                       id: res2.data.provinceId
                     },
                     callback: function (city) {
                       if (city.status === 0) {
                         dispatch({
-                          type: 'app/getCountys',
+                          type: 'common/getCountys',
                           payload: {
                             id: res2.data.cityId
                           },
@@ -285,8 +291,8 @@ class StoreEdit extends Component {
 
   render() {
     const { previewVisible, previewImage, fileList, urlList, activityDetail, description, evaluateStatus, listImageUrl, loading, sloading } = this.state;
-    const { form, params: { id }, app, store: { getStoreByIdData } } = this.props;
-    const { Provinces, Citys, Countys } = app;
+    const { form, params: { id }, common, store: { getStoreByIdData } } = this.props;
+    const { Provinces, Citys, Countys } = common;
     const { getFieldDecorator } = form;
     const userType = localStorage.getItem('userType');
     const handleChange_description = (value) => {
@@ -548,14 +554,4 @@ class StoreEdit extends Component {
 
 StoreEdit.propTypes = {};
 
-
-function mapStateToProps({ store, app }) {
-  return {
-    store,
-    app
-  };
-}
-
-const WrappedStoreEdit = Form.create()(StoreEdit);
-
-export default connect(mapStateToProps)(WrappedStoreEdit);
+export default StoreEdit;

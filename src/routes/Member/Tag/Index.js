@@ -122,11 +122,10 @@ class TagList extends Component {
   }
 
   render() {
-    const { form, memeberTag, app } = this.props;
+    const { form, memeberTag, common } = this.props;
     const { pagination } = this.state;
     const { getMemberTagListData: { content, total } } = memeberTag;
     const { getFieldDecorator } = form;
-    const { resource = "" } = this.props.app;
 
     const columns = [{
       title: '标签名称',
@@ -236,10 +235,10 @@ class TagList extends Component {
 TagList.propTypes = {};
 
 
-function mapStateToProps({ memeberTag, app }) {
+function mapStateToProps({ memeberTag, common }) {
   return {
     memeberTag,
-    app,
+    common,
   };
 }
 

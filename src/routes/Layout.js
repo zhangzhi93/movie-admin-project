@@ -3,8 +3,9 @@ import { connect } from 'dva';
 import { Route, Switch, Redirect } from 'dva/router';
 import { Layout, Breadcrumb } from 'antd';
 import styles from './style.less';
-import Header from '../components/Layout/Header';
-import Slider from '../components/Layout/Slider';
+
+import Header from '../components/Layout/Header/index';
+import Slider from '../components/Layout/Slider/index';
 import Index from './IndexPage';
 import StoreList from './StoreManage/StoreList';
 import StoreEdit from './StoreManage/StoreEdit';
@@ -27,7 +28,7 @@ function IndexPage({ children, app }) {
       <Header />
       <Layout>
         <Slider />
-        <Layout className={styles.Main}>
+        <Layout className={styles.content}>
           {/* <Breadcrumb separator=">>">
             <BreadcrumbItem>{firstMenuObj.name}</BreadcrumbItem>
             <BreadcrumbItem>{secondMenuObj.name}</BreadcrumbItem>

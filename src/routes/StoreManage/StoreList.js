@@ -3,13 +3,17 @@ import { connect } from 'dva';
 import { Layout, Button, Table, Card, Form, Row, Col, Input, DatePicker, Select, message, Upload } from 'antd';
 import { Link, routerRedux } from 'dva/router';
 import config from '../../utils/config';
-import styles from './index.less';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
 const { formItemLayout } = config;
-
+@connect(({ storeManage, common, loading }) => ({
+  storeManage,
+  common,
+  loading: loading.models.storeManage,
+}))
+@Form.create()
 class StoreList extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +32,7 @@ class StoreList extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'app/getStoreCitys'
+      type: 'common/getStoreCitys'
     });
     dispatch({
       type: 'storeManage/getStoreList',
@@ -162,7 +166,7 @@ class StoreList extends Component {
   }
 
   render() {
-    const { form, storeManage, app: { storeCountys } } = this.props;
+    const { form, storeManage, common: { storeCountys }, loading } = this.props;
     const { pagination } = this.state;
     const { getStoreListData: { content, total } } = storeManage;
     const { getFieldDecorator } = form;
@@ -237,7 +241,7 @@ class StoreList extends Component {
                       { max: 15, message: '门店长度不能大于15个字符' },
                     ]
                   })(
-                    <Input maxLength="15" size="default" placeholder="请输入" />,
+                    <Input maxLength={15} size="default" placeholder="请输入" />,
                   )}
                 </FormItem>
               </Col>
@@ -313,6 +317,7 @@ class StoreList extends Component {
         </Card>
         <div className="table-container">
           <Table
+            loading={loading}
             rowKey="id"
             columns={columns}
             dataSource={content}
@@ -336,14 +341,4 @@ class StoreList extends Component {
 
 StoreList.propTypes = {};
 
-
-function mapStateToProps({ storeManage, app }) {
-  return {
-    storeManage,
-    app
-  };
-}
-
-const WrappedStoreList = Form.create()(StoreList);
-
-export default connect(mapStateToProps)(WrappedStoreList);
+export default StoreList;

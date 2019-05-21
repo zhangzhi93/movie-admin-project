@@ -11,8 +11,8 @@ import 'echarts/lib/component/tooltip';
 import { pieOption, barOption, rateOption } from '../utils/EchartsOptions';
 import styles from './style.less';
 
-
-class Index extends Component {
+@connect(({ index }) => ({ index }))
+class Home extends Component {
   constructor() {
     super();
     this.state = {
@@ -102,13 +102,7 @@ class Index extends Component {
   }
 }
 
-Index.propTypes = {
+Home.propTypes = {
 };
 
-function mapStateToProps({ index }) {
-  return {
-    index
-  };
-}
-
-export default connect(mapStateToProps)(Index);
+export default Home;

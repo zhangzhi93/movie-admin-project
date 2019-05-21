@@ -37,7 +37,6 @@ export default {
       const { data } = yield call(getStoreManageById, payload);
       if (data && data.msg === 'SUCCESS') {
         if (callback) callback(data.data);
-        yield put({ type: 'app/saveResource', payload: { data: data } });
       }
     },
     *getStoreCodeById({ payload, callback }, { call, put }) {

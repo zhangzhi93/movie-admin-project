@@ -5,13 +5,21 @@ import debounce from 'lodash/debounce';
 import config from '../../../utils/config';
 import qs from 'qs';
 import { Link } from 'dva/router';
-import style from '../index.less';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 const { RangePicker } = DatePicker;
 const { formItemLayout } = config;
 
+
+@connect(({ memberUser, memeberTag, memeberGroup, storeManage, loading }) => ({
+  memberUser,
+  storeManage,
+  memeberTag,
+  memeberGroup,
+  loading,
+}))
+@Form.create()
 class UserList extends Component {
   constructor(props) {
     super(props);
@@ -457,7 +465,7 @@ class UserList extends Component {
                       { max: 15, message: '活动名称长度不能大于15个字符' },
                     ]
                   })(
-                    <Input maxLength="15" placeholder="请输入" />,
+                    <Input maxLength={15} placeholder="请输入" />,
                   )}
                 </FormItem>
               </Col>
@@ -551,18 +559,4 @@ class UserList extends Component {
 
 UserList.propTypes = {};
 
-
-function mapStateToProps({ memberUser, memeberTag, memeberGroup, storeManage, app, loading }) {
-  return {
-    loading,
-    memberUser,
-    storeManage,
-    memeberTag,
-    memeberGroup,
-    app,
-  };
-}
-
-const WrappedUserList = Form.create()(UserList);
-
-export default connect(mapStateToProps)(WrappedUserList);
+export default UserList;
