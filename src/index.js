@@ -1,11 +1,15 @@
 import dva from 'dva';
 import ReactDOM from 'react-dom';
-import { LocaleProvider } from 'antd';
+import { LocaleProvider, message } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
 import createLoading from 'dva-loading';
 
 // 1. Initialize
-const app = dva();
+const app = dva({
+  onError(error) {
+    message.error(error.message);
+  },
+});
 
 // 2. Plugins
 app.use(createLoading());
