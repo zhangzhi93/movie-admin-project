@@ -13,6 +13,13 @@ const formItemLayout = {
   wrapperCol: { span: 18 },
 };
 
+
+@connect(({ memeberOrder, storeManage, loading }) => ({
+  memeberOrder,
+  storeManage,
+  loading,
+}))
+@Form.create()
 class OrderList extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +43,7 @@ class OrderList extends Component {
       }
     })
     dispatch({
-      type: 'store/getStoreOption',
+      type: 'storeManage/getStoreOption',
     });
     dispatch({
       type: 'memeberOrder/getMemberOrderPlatform',
@@ -105,10 +112,11 @@ class OrderList extends Component {
   }
 
   render() {
-    const { form, memeberOrder, storeManage: { getStoreOptionData } } = this.props;
+    const { form, memeberOrder, storeManage: { getStoreOptionData }, loading } = this.props;
     const { pagination } = this.state;
     const { getMemberOrderListData: { content, total }, getMemberOrderPlatformData } = memeberOrder;
     const { getFieldDecorator } = form;
+    const isLoading = loading.effects['memeberOrder/getMemberOrderList'];
 
     const columns = [{
       title: '用户ID',
@@ -279,6 +287,7 @@ class OrderList extends Component {
         </Card>
         <div className="table-container">
           <Table
+            loading={isLoading}
             rowKey="orderTime"
             columns={columns}
             dataSource={content}

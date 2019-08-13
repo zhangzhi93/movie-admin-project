@@ -5,6 +5,7 @@ import Modal from './Modal';
 import style from '../index.less';
 
 const FormItem = Form.Item;
+const { Option } = Select;
 const { RangePicker } = DatePicker;
 const formItemLayout = {
   labelCol: { span: 6 },

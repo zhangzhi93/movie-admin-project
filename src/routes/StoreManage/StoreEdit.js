@@ -21,10 +21,10 @@ const formItemLayout = {
   },
 };
 
-@connect(({ store, common, loading }) => ({
-  store,
+@connect(({ storeManage, common, loading }) => ({
+  storeManage,
   common,
-  loading: loading.models.store,
+  loading: loading.models.storeManage,
 }))
 @Form.create()
 class StoreEdit extends Component {
@@ -53,7 +53,7 @@ class StoreEdit extends Component {
       callback: function (res) {
         if (id !== '0') {
           dispatch({
-            type: 'store/getStoreById',
+            type: 'storeManage/getStoreById',
             payload: { id },
             callback: (res2) => {
               const { data: { imageVOList, description, activityDetail, evaluateStatus, listImageUrl } } = res2;
@@ -109,7 +109,7 @@ class StoreEdit extends Component {
             provinceId: ''
           })
           dispatch({
-            type: 'store/save',
+            type: 'storeManage/save',
             payload: {
               getStoreByIdData: []
             }
@@ -195,9 +195,9 @@ class StoreEdit extends Component {
         message.error('请上传门店列表图');
         return;
       }
-      let requestUrl = 'store/addStore';
+      let requestUrl = 'storeManage/addStore';
       if (id !== 0) {
-        requestUrl = 'store/updateStore';
+        requestUrl = 'storeManage/updateStore';
       }
       values.evaluateStatus = evaluateStatus ? 1 : 0;
       values.description = description;
@@ -229,7 +229,7 @@ class StoreEdit extends Component {
               history.goBack();
             } else {
               dispatch({
-                type: 'store/getStoreById',
+                type: 'storeManage/getStoreById',
                 payload: { id },
                 callback: (res2) => {
                   const { data: { imageVOList, description, activityDetail, evaluateStatus, listImageUrl } } = res2;
